@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsVC: UITabBarController {
+class SettingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReadLaterVC: UITabBarController {
+class ReadLaterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
