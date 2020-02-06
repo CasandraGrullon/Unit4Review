@@ -12,6 +12,13 @@ class TopStoriesVC: UIViewController {
 
 
     private var topStoriesView = TopStoriesView()
+    var stories = [Article]() {
+        didSet{
+            DispatchQueue.main.async {
+                self.topStoriesView.collectionView.reloadData()
+            }
+        }
+    }
     
     override func loadView() {
         view = topStoriesView
@@ -22,6 +29,17 @@ class TopStoriesVC: UIViewController {
         topStoriesView.collectionView.delegate = self
         topStoriesView.collectionView.dataSource = self
         topStoriesView.collectionView.register(TopStoriesCell.self, forCellWithReuseIdentifier: "topStoriesCell")
+    }
+    
+    private func getStories(for section: String = "Technology") {
+        NYTTopStoriesAPIClient.fetchTopStories(for: section) { [weak self] (result) in
+            switch result {
+            case .failure(let appError):
+                print(appError)
+            case .success(let articles):
+                self?.stories = articles
+            }
+        }
     }
     
 }
