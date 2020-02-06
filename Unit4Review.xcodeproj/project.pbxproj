@@ -21,6 +21,7 @@
 		C681F6EA23EC6E7500BD22CE /* ReadLaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681F6E923EC6E7500BD22CE /* ReadLaterView.swift */; };
 		C681F6EC23EC6E8200BD22CE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681F6EB23EC6E8200BD22CE /* SettingsView.swift */; };
 		C681F6EF23EC75BF00BD22CE /* TopStoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681F6EE23EC75BF00BD22CE /* TopStoriesCell.swift */; };
+		C681F6F123EC84F600BD22CE /* TopStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681F6F023EC84F600BD22CE /* TopStories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		C681F6E923EC6E7500BD22CE /* ReadLaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadLaterView.swift; sourceTree = "<group>"; };
 		C681F6EB23EC6E8200BD22CE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C681F6EE23EC75BF00BD22CE /* TopStoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesCell.swift; sourceTree = "<group>"; };
+		C681F6F023EC84F600BD22CE /* TopStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		C681F6E623EC6E3100BD22CE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C681F6F023EC84F600BD22CE /* TopStories.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				C62DA76D23EC69380088D269 /* Config.swift in Sources */,
 				C62DA75923EC67840088D269 /* AppDelegate.swift in Sources */,
 				C62DA77D23EC6BC90088D269 /* TopStoriesVC.swift in Sources */,
+				C681F6F123EC84F600BD22CE /* TopStories.swift in Sources */,
 				C681F6E223EC6DEA00BD22CE /* ReadLaterVC.swift in Sources */,
 				C62DA75B23EC67840088D269 /* SceneDelegate.swift in Sources */,
 				C681F6EC23EC6E8200BD22CE /* SettingsView.swift in Sources */,

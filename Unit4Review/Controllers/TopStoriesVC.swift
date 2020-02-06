@@ -24,7 +24,6 @@ class TopStoriesVC: UIViewController {
         topStoriesView.collectionView.register(TopStoriesCell.self, forCellWithReuseIdentifier: "topStoriesCell")
     }
     
-
 }
 
 extension TopStoriesVC: UICollectionViewDataSource {
