@@ -35,7 +35,7 @@ class TopStoriesVC: UIViewController {
         NYTTopStoriesAPIClient.fetchTopStories(for: section) { [weak self] (result) in
             switch result {
             case .failure(let appError):
-                print(appError)
+                print("error: \(appError)")
             case .success(let articles):
                 self?.stories = articles
             }
@@ -53,6 +53,8 @@ extension TopStoriesVC: UICollectionViewDataSource {
             fatalError("could not cast to TopStoriesCell")
         }
         cell.backgroundColor = .white
+        let article = stories[indexPath.row]
+        cell.configureCell(for: article)
         return cell
     }
 }
