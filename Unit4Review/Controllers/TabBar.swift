@@ -9,14 +9,28 @@
 import UIKit
 
 class TabBar: UITabBarController {
-
     
+    private lazy var topStoriesVC: TopStoriesVC = {
+        let viewController = TopStoriesVC()
+        viewController.tabBarItem = UITabBarItem(title: "Top Stories", image: UIImage(named: "eyeglasses"), tag: 0)
+        return viewController
+    }()
+    private lazy var readLaterVC: ReadLaterVC = {
+        let viewController = ReadLaterVC()
+        viewController.tabBarItem = UITabBarItem(title: "Top Stories", image: UIImage(named: "folder"), tag: 1)
+        return viewController
+    }()
+    private lazy var settingsVC: SettingsVC = {
+        let viewController = SettingsVC()
+        viewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "gear"), tag: 2)
+        return viewController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .yellow
+        
+        viewControllers = [topStoriesVC, readLaterVC, settingsVC]
     }
- 
-
+    
+    
 }

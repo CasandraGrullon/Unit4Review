@@ -1,5 +1,5 @@
 //
-//  TopStoriesVC.swift
+//  ReadLaterVC.swift
 //  Unit4Review
 //
 //  Created by casandra grullon on 2/6/20.
@@ -8,15 +8,12 @@
 
 import UIKit
 
-class TopStoriesVC: UIViewController {
+class ReadLaterVC: UITabBarController {
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
-        
+        view.backgroundColor = .orange
     }
-    
+
 
 }
