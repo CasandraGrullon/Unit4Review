@@ -23,6 +23,7 @@ class TabBar: UITabBarController {
         let viewController = ReadLaterVC()
         viewController.tabBarItem = UITabBarItem(title: "Read Later", image: UIImage(systemName: "folder"), tag: 1)
         viewController.dataPersistence = dataPersistence
+        viewController.dataPersistence.delegate = viewController
         return viewController
     }()
     private lazy var settingsVC: SettingsVC = {

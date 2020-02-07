@@ -76,6 +76,7 @@ extension TopStoriesVC: UICollectionViewDelegateFlowLayout {
         
         let detailVC = ArticleDetailVC()
         detailVC.article = article
+        detailVC.dataPersistence = dataPersistence
         
         navigationController?.pushViewController(detailVC, animated: true)
     }

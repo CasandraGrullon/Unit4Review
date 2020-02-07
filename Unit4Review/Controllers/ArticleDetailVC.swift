@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import DataPersistence
 
 class ArticleDetailVC: UIViewController {
 
     private var articleDetailView = ArticleDetailView()
+    
+    public var dataPersistence: DataPersistence<Article>!
     
     public var article: Article?
     
@@ -47,7 +50,14 @@ class ArticleDetailVC: UIViewController {
     }
     
     @objc func saveArticleButtonPressed(_ sender: UIBarButtonItem) {
-        
+        guard let story = article else {
+            return
+        }
+        do {
+            try dataPersistence.createItem(story)
+        } catch {
+            print("error creating item \(error)")
+        }
     }
 
 }
