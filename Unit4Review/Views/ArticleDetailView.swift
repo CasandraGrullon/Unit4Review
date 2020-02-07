@@ -41,6 +41,8 @@ class ArticleDetailView: UIView {
     }
     private func commonInit() {
         storyImageConstraints()
+        abstractConstraints()
+        byLineConstraints()
     }
     
     private func storyImageConstraints() {
@@ -62,6 +64,15 @@ class ArticleDetailView: UIView {
             abstractLabel.topAnchor.constraint(equalTo: storyImage.bottomAnchor, constant: 8),
             abstractLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             abstractLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+        ])
+    }
+    private func byLineConstraints() {
+        addSubview(byLine)
+        byLine.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            byLine.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            byLine.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
         ])
     }
     

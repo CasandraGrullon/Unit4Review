@@ -21,7 +21,7 @@ class ArticleDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: #selector(saveArticleButtonPressed(_:)))
     }
     
@@ -31,6 +31,20 @@ class ArticleDetailVC: UIViewController {
             fatalError("did not load an article")
         }
         navigationItem.title = article.title
+        articleDetailView.abstractLabel.text = article.abstract
+        articleDetailView.byLine.text = article.byline
+        articleDetailView.storyImage.getImage(with: article.getArticleImageURL(for: .superJumbo)) { [weak self] (result) in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.articleDetailView.storyImage.image = UIImage(systemName: "photo")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.articleDetailView.storyImage.image = image
+                }
+            }
+        }
     }
     
     @objc func saveArticleButtonPressed(_ sender: UIBarButtonItem) {

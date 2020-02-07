@@ -32,6 +32,7 @@ struct Article: Codable {
     let abstract: String
     let publishedDate: String
     let multimedia: [Multimedia]
+    let byline: String
     
     private enum CodingKeys: String, CodingKey {
         case section
@@ -39,6 +40,7 @@ struct Article: Codable {
         case abstract
         case publishedDate = "published_date"
         case multimedia
+        case byline
     }
 }
 struct Multimedia: Codable {
