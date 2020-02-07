@@ -28,7 +28,7 @@ class TabBar: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [topStoriesVC, readLaterVC, settingsVC]
+        viewControllers = [UINavigationController(rootViewController: topStoriesVC), UINavigationController(rootViewController: readLaterVC),UINavigationController(rootViewController: settingsVC)]
     }
     
     

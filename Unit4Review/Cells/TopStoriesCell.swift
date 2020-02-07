@@ -11,6 +11,12 @@ import ImageKit
 
 class TopStoriesCell: UICollectionViewCell {
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        storyImage.clipsToBounds = true
+        storyImage.layer.cornerRadius = 13
+      }
+    
     public var storyImage: UIImageView = {
         let imageV = UIImageView()
         imageV.contentMode = .scaleAspectFit
@@ -54,7 +60,7 @@ class TopStoriesCell: UICollectionViewCell {
             storyImage.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             storyImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             storyImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80),
-            storyImage.widthAnchor.constraint(equalTo: storyImage.heightAnchor)
+            storyImage.widthAnchor.constraint(equalTo: storyImage.heightAnchor),
         ])
     }
     private func headlineConstraints() {

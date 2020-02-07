@@ -67,4 +67,13 @@ extension TopStoriesVC: UICollectionViewDelegateFlowLayout {
         let itemHeight: CGFloat = maxsize.height * 0.20
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let article = newsArticles[indexPath.row]
+        
+        let detailVC = ArticleDetailVC()
+        detailVC.article = article
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
