@@ -53,7 +53,7 @@ class TopStoriesCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             storyImage.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             storyImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            storyImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.30),
+            storyImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.80),
             storyImage.widthAnchor.constraint(equalTo: storyImage.heightAnchor)
         ])
     }
@@ -80,7 +80,7 @@ class TopStoriesCell: UICollectionViewCell {
     public func configureCell(for story: Article) {
         abstractLabel.text = story.abstract
         headlineLabel.text = story.title
-        storyImage.getImage(with: story.multimedia.first?.url ?? "") { (result) in
+        storyImage.getImage(with: story.getArticleImageURL(for: .thumbLarge)) { (result) in
             switch result {
             case .failure:
                 DispatchQueue.main.async {

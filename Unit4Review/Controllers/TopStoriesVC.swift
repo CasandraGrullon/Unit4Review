@@ -54,6 +54,7 @@ extension TopStoriesVC: UICollectionViewDataSource {
         guard let cell = topStoriesView.collectionView.dequeueReusableCell(withReuseIdentifier: "topStoriesCell", for: indexPath) as? TopStoriesCell else {
             fatalError("could not cast to topstoriescell")
         }
+        cell.backgroundColor = .white
         let story = newsArticles[indexPath.row]
         cell.configureCell(for: story)
         return cell
