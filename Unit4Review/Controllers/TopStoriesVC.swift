@@ -46,15 +46,11 @@ class TopStoriesVC: UIViewController {
 
 extension TopStoriesVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return stories.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = topStoriesView.collectionView.dequeueReusableCell(withReuseIdentifier: "topStoriesCell", for: indexPath) as? TopStoriesCell else {
-            fatalError("could not cast to TopStoriesCell")
-        }
-        cell.backgroundColor = .white
-        let article = stories[indexPath.row]
-        cell.configureCell(for: article)
+        let cell = topStoriesView.collectionView.dequeueReusableCell(withReuseIdentifier: "topStoriesCell", for: indexPath)
+        
         return cell
     }
 }
