@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import DataPersistence
 
 class TopStoriesVC: UIViewController {
+    
+    public var dataPersistence: DataPersistence<Article>!
 
     private var topStoriesView = TopStoriesView()
     
