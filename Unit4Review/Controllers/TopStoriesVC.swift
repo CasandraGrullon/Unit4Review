@@ -10,9 +10,9 @@ import UIKit
 
 class TopStoriesVC: UIViewController {
 
-
     private var topStoriesView = TopStoriesView()
-    var stories = [Article]() {
+    
+    private var newsArticles = [Article]() {
         didSet{
             DispatchQueue.main.async {
                 self.topStoriesView.collectionView.reloadData()
@@ -23,12 +23,14 @@ class TopStoriesVC: UIViewController {
     override func loadView() {
         view = topStoriesView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         topStoriesView.collectionView.delegate = self
         topStoriesView.collectionView.dataSource = self
         topStoriesView.collectionView.register(TopStoriesCell.self, forCellWithReuseIdentifier: "topStoriesCell")
+        getStories()
     }
     
     private func getStories(for section: String = "Technology") {
@@ -37,7 +39,7 @@ class TopStoriesVC: UIViewController {
             case .failure(let appError):
                 print("error: \(appError)")
             case .success(let articles):
-                self?.stories = articles
+                self?.newsArticles = articles
             }
         }
     }
@@ -46,11 +48,14 @@ class TopStoriesVC: UIViewController {
 
 extension TopStoriesVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stories.count
+        return newsArticles.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = topStoriesView.collectionView.dequeueReusableCell(withReuseIdentifier: "topStoriesCell", for: indexPath)
-        
+        guard let cell = topStoriesView.collectionView.dequeueReusableCell(withReuseIdentifier: "topStoriesCell", for: indexPath) as? TopStoriesCell else {
+            fatalError("could not cast to topstoriescell")
+        }
+        let story = newsArticles[indexPath.row]
+        cell.configureCell(for: story)
         return cell
     }
 }
@@ -58,7 +63,7 @@ extension TopStoriesVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
         let itemWidth: CGFloat = maxsize.width
-        let itemHeight: CGFloat = maxsize.height * 0.30
+        let itemHeight: CGFloat = maxsize.height * 0.20
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
