@@ -8,11 +8,15 @@
 
 import UIKit
 
-class SettingsVC: UIViewController {
+struct UserKey {
+    static let sectionName = "News Section"
+}
 
+class SettingsVC: UIViewController {
+    
     private let settingsView = SettingsView()
     
-    private let sections = ["Arts", "Automobiles", "Books", "Business", "Fashion", "Food", "Health", "Home", "Insider", "Magazine", "Movies", "NYRegion", "Obituaries", "Opinion", "Politics", "RealeEstate", "Science", "Sports", "SundayReview", "Technology", "Theater", "T-Magazine", "Travel", "Upshot", "US", "World"]
+    private let sections = ["Arts", "Automobiles", "Books", "Business", "Fashion", "Food", "Health", "Insider", "Magazine", "Movies", "NYRegion", "Obituaries", "Opinion", "Politics", "RealeEstate", "Science", "Sports", "SundayReview", "Technology", "Theater", "T-Magazine", "Travel", "Upshot", "US", "World"]
     
     override func loadView() {
         view = settingsView
@@ -30,6 +34,10 @@ class SettingsVC: UIViewController {
 extension SettingsVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return sections[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let sectionName = sections[row]
+        UserDefaults.standard.set(sectionName, forKey: UserKey.sectionName)
     }
 }
 extension SettingsVC: UIPickerViewDataSource {

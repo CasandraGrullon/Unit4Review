@@ -23,6 +23,13 @@ class TopStoriesVC: UIViewController {
         }
     }
     
+    private var sectionName = "Technology" {
+        didSet {
+            //getStories(for: sectionName)
+            navigationItem.title = "\(sectionName) News"
+        }
+    }
+    
     override func loadView() {
         view = topStoriesView
     }
@@ -33,10 +40,30 @@ class TopStoriesVC: UIViewController {
         topStoriesView.collectionView.delegate = self
         topStoriesView.collectionView.dataSource = self
         topStoriesView.collectionView.register(TopStoriesCell.self, forCellWithReuseIdentifier: "topStoriesCell")
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         getStories()
     }
     
     private func getStories(for section: String = "Technology") {
+        //retrieve sectionName from UserDefaults
+        if let sectionName = UserDefaults.standard.object(forKey: UserKey.sectionName) as? String {
+            if sectionName != self.sectionName {
+                //we are looking at a new section
+                //make a query
+                queryAPI(for: sectionName)
+                self.sectionName = sectionName
+            }
+        } else {
+            //make default section selection ex: Technology
+            queryAPI(for: sectionName)
+        }
+    }
+    
+    private func queryAPI(for section: String) {
         NYTTopStoriesAPIClient.fetchTopStories(for: section) { [weak self] (result) in
             switch result {
             case .failure(let appError):
@@ -46,7 +73,6 @@ class TopStoriesVC: UIViewController {
             }
         }
     }
-    
 }
 
 extension TopStoriesVC: UICollectionViewDataSource {

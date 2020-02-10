@@ -77,19 +77,19 @@ extension ReadLaterVC: UICollectionViewDelegateFlowLayout {
         let itemHeight: CGFloat = maxsize.height * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //
-    //        let article = savedArticles[indexPath.row]
-    //
-    //        let detailVC = ArticleDetailVC()
-    //        detailVC.article = article
-    //        detailVC.dataPersistence = dataPersistence
-    //
-    //        navigationController?.pushViewController(detailVC, animated: true)
-    //    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let article = savedArticles[indexPath.row]
+        let detailVC = ArticleDetailVC()
+        detailVC.article = article
+        //TODO: using initializers instead of injecting individual properties
+        detailVC.dataPersistence = dataPersistence
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension ReadLaterVC: DataPersistenceDelegate {
