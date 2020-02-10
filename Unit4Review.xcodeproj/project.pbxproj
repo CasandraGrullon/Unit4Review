@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C61C628023F1B34500E0E679 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61C627F23F1B34500E0E679 /* EmptyView.swift */; };
 		C62DA75923EC67840088D269 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DA75823EC67840088D269 /* AppDelegate.swift */; };
 		C62DA75B23EC67840088D269 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DA75A23EC67840088D269 /* SceneDelegate.swift */; };
 		C62DA76223EC67860088D269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C62DA76123EC67860088D269 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C61C627F23F1B34500E0E679 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		C62DA75523EC67840088D269 /* Unit4Review.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unit4Review.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62DA75823EC67840088D269 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C62DA75A23EC67840088D269 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				C67D0A4623EDCEEB00F8BDC3 /* ArticleDetailView.swift */,
 				C681F6E923EC6E7500BD22CE /* ReadLaterView.swift */,
 				C681F6EB23EC6E8200BD22CE /* SettingsView.swift */,
+				C61C627F23F1B34500E0E679 /* EmptyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				C62DA75923EC67840088D269 /* AppDelegate.swift in Sources */,
 				C62DA77D23EC6BC90088D269 /* TopStoriesVC.swift in Sources */,
 				C67D0A4723EDCEEB00F8BDC3 /* ArticleDetailView.swift in Sources */,
+				C61C628023F1B34500E0E679 /* EmptyView.swift in Sources */,
 				C681F6F123EC84F600BD22CE /* TopStories.swift in Sources */,
 				C681F6E223EC6DEA00BD22CE /* ReadLaterVC.swift in Sources */,
 				C62DA75B23EC67840088D269 /* SceneDelegate.swift in Sources */,

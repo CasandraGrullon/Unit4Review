@@ -11,7 +11,7 @@ import DataPersistence
 
 class ArticleDetailVC: UIViewController {
 
-    private var articleDetailView = ArticleDetailView()
+    private let articleDetailView = ArticleDetailView()
     
     public var dataPersistence: DataPersistence<Article>!
     

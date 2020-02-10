@@ -11,13 +11,20 @@ import DataPersistence
 
 class ReadLaterVC: UIViewController {
 
-    public var dataPersistence: DataPersistence<Article>!
+    private let readLaterView = ReadLaterView()
     
-    private var readLaterView = ReadLaterView()
+    public var dataPersistence: DataPersistence<Article>!
     
     var savedArticles = [Article]() {
         didSet {
             print("there are \(savedArticles.count) articles saved")
+            if savedArticles.isEmpty {
+                //setup empty view on background of collection view
+                readLaterView.collectionView.backgroundView = EmptyView.init(title: "Saved Articles", message: "There are currently no saved articles")
+            } else {
+                //remove empty view from collection view background
+                readLaterView.collectionView.backgroundView = nil
+            }
         }
     }
     override func loadView() {
@@ -26,7 +33,7 @@ class ReadLaterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        view.backgroundColor = .systemPink
         loadSavedArticles()
         readLaterView.collectionView.delegate = self
         readLaterView.collectionView.dataSource = self
@@ -61,9 +68,15 @@ extension ReadLaterVC: UICollectionViewDataSource {
 extension ReadLaterVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
-        let itemWidth: CGFloat = maxsize.width
-        let itemHeight: CGFloat = maxsize.height * 0.20
+        let spacingBetweenItems: CGFloat = 10
+        let numberofItems: CGFloat = 2
+        let totalSpacing: CGFloat = (2 * spacingBetweenItems) + (numberofItems - 1) * spacingBetweenItems
+        let itemWidth: CGFloat = (maxsize.width - totalSpacing) / numberofItems
+        let itemHeight: CGFloat = maxsize.height * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -79,7 +92,8 @@ extension ReadLaterVC: UICollectionViewDelegateFlowLayout {
 
 extension ReadLaterVC: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("item saved")
+        //savedArticles.append(item)
+        loadSavedArticles()
     }
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
         print("item deleted")
