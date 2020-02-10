@@ -21,7 +21,7 @@ class TopStoriesView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.5191303492, green: 0.5688455105, blue: 0.84514606, alpha: 1)
+        cv.backgroundColor = .systemGray2
         return cv
     }()
     

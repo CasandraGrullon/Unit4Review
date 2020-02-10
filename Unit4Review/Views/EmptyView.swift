@@ -27,10 +27,6 @@ class EmptyView: UIView {
         return label
     }()
     
-//    override init(frame: CGRect) {
-//        super.init(frame: UIScreen.main.bounds)
-//        commonInit()
-//    }
     init(title: String, message: String) {
         super.init(frame: UIScreen.main.bounds)
         titleLabel.text = title
