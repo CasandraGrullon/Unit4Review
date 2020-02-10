@@ -13,16 +13,29 @@ class ReadLaterVC: UIViewController {
 
     public var dataPersistence: DataPersistence<Article>!
     
-    var articles = [Article]()
+    private var readLaterView = ReadLaterView()
+    
+    var savedArticles = [Article]() {
+        didSet {
+            print("there are \(savedArticles.count) articles saved")
+        }
+    }
+    override func loadView() {
+        view = readLaterView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
+        loadSavedArticles()
+        readLaterView.collectionView.delegate = self
+        readLaterView.collectionView.dataSource = self
+        readLaterView.collectionView.register(TopStoriesCell.self, forCellWithReuseIdentifier: "storyCell")
     }
 
     private func loadSavedArticles() {
         do {
-            articles = try dataPersistence.loadItems()
+            savedArticles = try dataPersistence.loadItems()
         } catch {
             print("could not load saved articles: \(error)")
         }
@@ -30,10 +43,42 @@ class ReadLaterVC: UIViewController {
 
 }
 
+extension ReadLaterVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return savedArticles.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = readLaterView.collectionView.dequeueReusableCell(withReuseIdentifier: "storyCell", for: indexPath) as? TopStoriesCell else {
+            fatalError("could not cast to cell")
+        }
+        let faved = savedArticles[indexPath.row]
+        cell.backgroundColor = .white
+        cell.configureCell(for: faved)
+        return cell
+    }
+}
+extension ReadLaterVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let maxsize: CGSize = UIScreen.main.bounds.size
+        let itemWidth: CGFloat = maxsize.width
+        let itemHeight: CGFloat = maxsize.height * 0.20
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let article = savedArticles[indexPath.row]
+        
+        let detailVC = ArticleDetailVC()
+        detailVC.article = article
+        detailVC.dataPersistence = dataPersistence
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
 
 extension ReadLaterVC: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        //articles.append(item)
         print("item saved")
     }
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {

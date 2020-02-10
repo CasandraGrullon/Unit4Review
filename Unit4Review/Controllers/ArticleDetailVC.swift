@@ -50,6 +50,7 @@ class ArticleDetailVC: UIViewController {
     }
     
     @objc func saveArticleButtonPressed(_ sender: UIBarButtonItem) {
+        sender.image = UIImage(systemName: "bookmark.fill")
         guard let story = article else {
             return
         }
