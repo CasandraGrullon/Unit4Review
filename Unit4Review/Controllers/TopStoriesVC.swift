@@ -11,7 +11,8 @@ import DataPersistence
 
 class TopStoriesVC: UIViewController {
     
-    public var dataPersistence: DataPersistence<Article>!
+    private var dataPersistence: DataPersistence<Article>
+    //private var userPreference: UserPreference!
 
     private var topStoriesView = TopStoriesView()
     
@@ -30,6 +31,16 @@ class TopStoriesVC: UIViewController {
         }
     }
     
+    //initializer
+    init(_ dataPersistence: DataPersistence<Article>) {
+        self.dataPersistence = dataPersistence
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = topStoriesView
     }
@@ -39,6 +50,7 @@ class TopStoriesVC: UIViewController {
         view.backgroundColor = .systemBackground
         topStoriesView.collectionView.delegate = self
         topStoriesView.collectionView.dataSource = self
+        topStoriesView.searchBar.delegate = self
         topStoriesView.collectionView.register(TopStoriesCell.self, forCellWithReuseIdentifier: "topStoriesCell")
         
     }
@@ -56,6 +68,8 @@ class TopStoriesVC: UIViewController {
                 //make a query
                 queryAPI(for: sectionName)
                 self.sectionName = sectionName
+            } else {
+                queryAPI(for: sectionName)
             }
         } else {
             //make default section selection ex: Technology
@@ -83,7 +97,7 @@ extension TopStoriesVC: UICollectionViewDataSource {
         guard let cell = topStoriesView.collectionView.dequeueReusableCell(withReuseIdentifier: "topStoriesCell", for: indexPath) as? TopStoriesCell else {
             fatalError("could not cast to topstoriescell")
         }
-        cell.backgroundColor = .white
+        cell.backgroundColor = .clear
         let story = newsArticles[indexPath.row]
         cell.configureCell(for: story)
         return cell
@@ -100,10 +114,41 @@ extension TopStoriesVC: UICollectionViewDelegateFlowLayout {
         
         let article = newsArticles[indexPath.row]
         
-        let detailVC = ArticleDetailVC()
-        detailVC.article = article
-        detailVC.dataPersistence = dataPersistence
+        let detailVC = ArticleDetailVC(dataPersistence, article: article)
+        //no longer needed
+        //detailVC.article = article
+        //detailVC.dataPersistence = dataPersistence
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
+    //all scrollable objects (collection view and table view) have this built in protocol method because these objects inherit from scrollview
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if topStoriesView.searchBar.isFirstResponder {
+            topStoriesView.searchBar.resignFirstResponder()
+        }
+    }
 }
+extension TopStoriesVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            //if text is empty reload all the articles
+            getStories()
+            return
+        }
+        //filter articles based on search text
+        newsArticles = newsArticles.filter { $0.title.lowercased().contains(searchText.lowercased()) }
+    }
+    
+}
+//extension TopStoriesVC {
+//    private func addBackgroundGradient() {
+//        let collectionViewBackgroundView = topStoriesView.collectionView
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame.size = topStoriesView.frame.size
+//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+//        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+//        gradientLayer.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+//        topStoriesView.collectionView.backgroundView = collectionViewBackgroundView
+//        topStoriesView.collectionView.backgroundView?.layer.addSublayer(gradientLayer)
+//    }
+//}

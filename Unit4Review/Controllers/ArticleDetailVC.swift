@@ -13,10 +13,20 @@ class ArticleDetailVC: UIViewController {
 
     private let articleDetailView = ArticleDetailView()
     
-    public var dataPersistence: DataPersistence<Article>!
+    private var dataPersistence: DataPersistence<Article>
     
-    public var article: Article?
+    private var article: Article
     
+    init(_ dataPersistence: DataPersistence<Article>, article: Article) {
+        self.dataPersistence = dataPersistence
+        self.article = article
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+     
     override func loadView() {
         view = articleDetailView
     }
@@ -29,9 +39,6 @@ class ArticleDetailVC: UIViewController {
     }
 
     private func updateUI() {
-        guard let article = article else {
-            fatalError("did not load an article")
-        }
         navigationItem.title = article.title
         articleDetailView.abstractLabel.text = article.abstract
         articleDetailView.byLine.text = article.byline
@@ -51,11 +58,9 @@ class ArticleDetailVC: UIViewController {
     
     @objc func saveArticleButtonPressed(_ sender: UIBarButtonItem) {
         sender.image = UIImage(systemName: "bookmark.fill")
-        guard let story = article else {
-            return
-        }
+        
         do {
-            try dataPersistence.createItem(story)
+            try dataPersistence.createItem(article)
         } catch {
             print("error creating item \(error)")
         }

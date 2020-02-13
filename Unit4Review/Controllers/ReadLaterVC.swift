@@ -13,9 +13,9 @@ class ReadLaterVC: UIViewController {
     
     private let readLaterView = ReadLaterView()
     
-    public var dataPersistence: DataPersistence<Article>!
+    private var dataPersistence: DataPersistence<Article>
     
-    var savedArticles = [Article]() {
+    private var savedArticles = [Article]() {
         didSet {
             readLaterView.collectionView.reloadData()
             print("there are \(savedArticles.count) articles saved")
@@ -28,6 +28,18 @@ class ReadLaterVC: UIViewController {
             }
         }
     }
+    
+    init(_ dataPersistence: DataPersistence<Article>) {
+        self.dataPersistence = dataPersistence
+        super.init(nibName: nil, bundle: nil)
+        //delegate needs to be assigned in the initializer
+        self.dataPersistence.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = readLaterView
     }
@@ -84,10 +96,8 @@ extension ReadLaterVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let article = savedArticles[indexPath.row]
-        let detailVC = ArticleDetailVC()
-        detailVC.article = article
+        let detailVC = ArticleDetailVC(dataPersistence, article: article)
         //TODO: using initializers instead of injecting individual properties
-        detailVC.dataPersistence = dataPersistence
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
