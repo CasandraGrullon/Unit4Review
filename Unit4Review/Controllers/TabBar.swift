@@ -13,7 +13,6 @@ class TabBar: UITabBarController {
     
     private var dataPersistence = DataPersistence<Article>(filename: "savedArticles.plist")
     
-    
     private lazy var topStoriesVC: TopStoriesVC = {
         //This is dependency initializers
         let viewController = TopStoriesVC(dataPersistence)

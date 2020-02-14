@@ -17,6 +17,12 @@ class ArticleDetailVC: UIViewController {
     
     private var article: Article
     
+    private lazy var tapGesture: UITapGestureRecognizer = {
+       let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(didTap(_:)))
+        return gesture
+    }()
+    
     init(_ dataPersistence: DataPersistence<Article>, article: Article) {
         self.dataPersistence = dataPersistence
         self.article = article
@@ -36,6 +42,19 @@ class ArticleDetailVC: UIViewController {
         updateUI()
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: #selector(saveArticleButtonPressed(_:)))
+        articleDetailView.storyImage.isUserInteractionEnabled = true
+        articleDetailView.storyImage.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func didTap(_ gesture: UITapGestureRecognizer) {
+        let image = articleDetailView.storyImage.image ?? UIImage()
+        //need an instance of ZoomImageViewController from storyboard
+        let zoomImageStoryBoard = UIStoryboard(name: "ZoomImage", bundle: nil)
+        let zoomImageViewController = zoomImageStoryBoard.instantiateViewController(identifier: "ZoomImageViewController") { coder in
+            return ZoomImageViewController(coder: coder, image: image)
+        }
+        present(zoomImageViewController, animated: true)
+        
     }
 
     private func updateUI() {
@@ -54,7 +73,10 @@ class ArticleDetailVC: UIViewController {
                 }
             }
         }
-    }
+        
+
+        
+}
     
     @objc func saveArticleButtonPressed(_ sender: UIBarButtonItem) {
         sender.image = UIImage(systemName: "bookmark.fill")

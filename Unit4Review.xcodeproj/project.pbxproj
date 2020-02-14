@@ -28,6 +28,8 @@
 		C681F6F423EC864600BD22CE /* NYTTopStoriesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681F6F323EC864600BD22CE /* NYTTopStoriesAPIClient.swift */; };
 		C681F6F723EC866900BD22CE /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = C681F6F623EC866900BD22CE /* ImageKit */; };
 		C681F6F923EC8B1400BD22CE /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C681F6F823EC8B1400BD22CE /* Config.swift */; };
+		C6C3AE3623F6F130003BC5AF /* ZoomImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C3AE3523F6F130003BC5AF /* ZoomImage.storyboard */; };
+		C6C3AE3823F6F146003BC5AF /* ZoomImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C3AE3723F6F146003BC5AF /* ZoomImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		C681F6F023EC84F600BD22CE /* TopStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStories.swift; sourceTree = "<group>"; };
 		C681F6F323EC864600BD22CE /* NYTTopStoriesAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTTopStoriesAPIClient.swift; sourceTree = "<group>"; };
 		C681F6F823EC8B1400BD22CE /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Config.swift; path = ../Config.swift; sourceTree = "<group>"; };
+		C6C3AE3523F6F130003BC5AF /* ZoomImage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ZoomImage.storyboard; sourceTree = "<group>"; };
+		C6C3AE3723F6F146003BC5AF /* ZoomImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 				C67D0A4423EDCB7E00F8BDC3 /* ArticleDetailVC.swift */,
 				C681F6E123EC6DEA00BD22CE /* ReadLaterVC.swift */,
 				C681F6E323EC6E0B00BD22CE /* SettingsVC.swift */,
+				C6C3AE3723F6F146003BC5AF /* ZoomImageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 				C681F6E923EC6E7500BD22CE /* ReadLaterView.swift */,
 				C681F6EB23EC6E8200BD22CE /* SettingsView.swift */,
 				C61C627F23F1B34500E0E679 /* EmptyView.swift */,
+				C6C3AE3523F6F130003BC5AF /* ZoomImage.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6C3AE3623F6F130003BC5AF /* ZoomImage.storyboard in Resources */,
 				C62DA76523EC67860088D269 /* LaunchScreen.storyboard in Resources */,
 				C62DA76223EC67860088D269 /* Assets.xcassets in Resources */,
 			);
@@ -301,6 +308,7 @@
 				C61C628023F1B34500E0E679 /* EmptyView.swift in Sources */,
 				C681F6F123EC84F600BD22CE /* TopStories.swift in Sources */,
 				C681F6E223EC6DEA00BD22CE /* ReadLaterVC.swift in Sources */,
+				C6C3AE3823F6F146003BC5AF /* ZoomImageViewController.swift in Sources */,
 				C61C628223F1BB6A00E0E679 /* SavedArticleCell.swift in Sources */,
 				C62DA75B23EC67840088D269 /* SceneDelegate.swift in Sources */,
 				C681F6EC23EC6E8200BD22CE /* SettingsView.swift in Sources */,
